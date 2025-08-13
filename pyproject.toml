@@ -1,0 +1,88 @@
+[project]
+name = "langgraph-starter-app"
+version = "0.1.0"
+description = "LangGraph Starter App"
+authors = [
+    { name = "Gys Muller", email = "gysmuller@users.noreply.github.com" },
+]
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+dependencies = [
+    "langgraph>=0.6.4",
+    "langchain>=0.3.27",
+    "langchain-core>=0.3.74",
+    "langchain-openai>=0.3.30",
+    "langchain-community>=0.3.27",  # For community tools like Tavily
+    "langchain-tavily>=0.2.9",      # Tavily search integration
+    "langgraph-sdk>=0.1.72",
+    "langgraph-checkpoint>=2.0.15,<3.0",
+    "langgraph-checkpoint-postgres>=2.0.23",  # PostgreSQL checkpoint support
+    "langgraph-supervisor>=0.0.27",  # Modern supervisor pattern library
+    "langsmith>=0.4.4",
+    "langgraph-cli>=0.3.3",
+    "langgraph-api>=0.2.86",
+    "python-dotenv>=1.0.1",
+    "psycopg[binary]>=3.2.9",      # PostgreSQL driver
+    "psycopg2-binary>=2.9.0",      # PostgreSQL driver (for raw connections)
+    "greenlet>=3.0.0",             # Required for SQLAlchemy async operations
+    "openai>=1.99.9",              # For LLM
+    "requests>=2.32.0",            # HTTP client for APIs
+    "pydantic>=2.11.7",            # Data validation
+    "aiohttp>=3.12.15",            # Async HTTP client
+    "tiktoken>=0.11.0",            # Token counting for OpenAI
+    "aiofiles>=24.1.0",            # Async file operations
+    "pymupdf>=1.26.3",             # PDF text extraction
+]
+
+
+[project.optional-dependencies]
+dev = ["mypy>=1.17.1", "ruff>=0.12.8"]
+
+[build-system]
+requires = ["setuptools>=73.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["src.shared", "src.chat_basic", "src.security"]
+[tool.setuptools.package-dir]
+"src.shared" = "src/shared"
+"src.chat_basic" = "src/chat_basic"
+"src.security" = "src/security"
+
+
+[tool.setuptools.package-data]
+"*" = ["py.typed"]
+
+[tool.ruff]
+lint.select = [
+    "E",    # pycodestyle
+    "F",    # pyflakes
+    "I",    # isort
+    "D",    # pydocstyle
+    "D401", # First line should be in imperative mood
+    "T201",
+    "UP",
+]
+lint.ignore = [
+    "UP006",
+    "UP007",
+    # We actually do want to import from typing_extensions
+    "UP035",
+    # Relax the convention by _not_ requiring documentation for every function parameter.
+    "D417",
+    "E501",
+]
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D", "UP"]
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[dependency-groups]
+dev = [
+    "anyio>=4.7.0",
+    "langgraph-cli[inmem]>=0.2.8",
+    "mypy>=1.17.1",
+    "pytest>=8.4.1",
+    "ruff>=0.12.8",
+]

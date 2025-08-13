@@ -1,0 +1,13 @@
+{
+  "dependencies": [
+    "."
+  ],
+  "graphs": {
+    "chat_basic": "./src/chat_basic/agent.py:create_chat_basic_graph"
+  },
+  "env": ".env",
+  "image_distro": "wolfi",
+  "auth": {
+    "path": "src/security/auth.py:auth"
+  }
+}
