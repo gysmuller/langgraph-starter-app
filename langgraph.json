@@ -3,7 +3,8 @@
     "."
   ],
   "graphs": {
-    "chat_basic": "./src/chat_basic/agent.py:create_chat_basic_graph"
+    "chat_basic": "./src/chat_basic/agent.py:create_chat_basic_graph",
+    "research_multi_agent": "./src/research_multi_agent/graph.py:create_research_multi_agent_graph"
   },
   "env": ".env",
   "image_distro": "wolfi",
